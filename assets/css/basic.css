@@ -1,0 +1,21 @@
+body {
+  background: white;
+}
+
+.content {
+  max-width: 1000px;
+  margin: 0px;
+  background: white;
+  padding-top: 15px;
+}
+.insideL {
+  max-width: 500px;
+  padding: 5px;
+  margin-left: 0px;
+  background: lightgray;
+}
+.insideR {
+  max-width: 500px;
+  margin-left: 100px;
+  margin-bottom: 150px;
+}
