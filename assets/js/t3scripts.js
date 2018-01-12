@@ -18,8 +18,9 @@ function calAge(){
   }
 }
 
-function ageTo65() {
+function ageToRet() {
   var age = calAge();
+  var retAge = document.getElementById("retAge").value;
   if(age != ''){
   var to65 = 65 - Math.floor(age / 1000 / 60 / 60 / 24 / 365);
   document.getElementById("theAge").innerHTML = 'You have ' + to65 +
