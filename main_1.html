@@ -68,9 +68,66 @@
                     Name: <input type="text" id="name"><br><br>
                     DoB: <input oninput="popRetAgeSel()" type="date" id="date"><br><br>
                     Income: <input type="text" id="income"><br><br>
+                    Growth: <select id="growth">
+                      <option value=".03">3%</option>
+                      <option value=".02">2%</option>
+                      <option value=".01">1%</option>
+                      <option value=".04">4%</option>
+                    </select><br><br>
                     Retirement Age: <select id="retAge"></select><br><br>
+                    Life Expectancy: <input type="number" id="LE"><br><br>
+                    Inflation rate: <select id="inflRate">
+                      <option value=".02">2%</option>
+                      <option value=".01">1%</option>
+                      <option value=".03">3%</option>
+                      <option value=".04">4%</option>
+                    </select><br><br>
+
+                    Would you like any of the following Long Term Care Options?<br><br><br><br>
+                    Adult Daycare: <select id="AD" onclick="showThis('AD')">
+                      <option>Select</option>
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select><br><br>
+                    <p style ="display: none" id="pAD">At What Age: <input type="number" id="ageAD"><br><br><br><br></p>
+
+                    Assisted Living: <select id="AL" onclick="showThis('AL')">
+                      <option>Select</option>
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select><br><br>
+                    <p style ="display: none" id="pAL">At What Age: <input type="number" id="ageAL"><br><br><br><br></p>
+
+                    Homemaker Services: <select id="HS" onclick="showThis('HS')">
+                      <option>Select</option>
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select><br><br>
+                    <p style ="display: none" id="pHS">At What Age: <input type="number" id="ageHS"><br><br><br><br></p>
+
+                    Inhome Health aid: <select id="IHA" onclick="showThis('IHA')">
+                      <option>Select</option>
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select><br><br>
+                    <p style ="display: none" id="pIHA">At What Age: <input type="number" id="ageIHA"><br><br><br><br></p>
+
+                    Nursing home (Semi private room): <select id="NHS" onclick="showThis('NHS')">
+                      <option>Select</option>
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select><br><br>
+                    <p style ="display: none" id="pNHS">At What Age: <input type="number" id="ageNHS"><br><br><br><br></p>
+
+                    Nursing Home (private room): <select id="NHP" onclick="showThis('NHP')">
+                      <option>Select</option>
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select><br><br>
+                    <p style ="display: none" id="pNHP">At What Age: <input type="number" id="ageNHP"><br><br><br><br></p>
+
                   </form>
-                  <button onclick="greet(), ageToRet(), calIncome()">Done</button>
+                  <button onclick="greet(), totalCost()">Done</button>
                 </div>
               </th>
               <th>

@@ -6,6 +6,13 @@ function greet(){
   document.getElementById("Income").style.display = 'block';
 }
 
+function showThis(id){
+  var ide = document.getElementById(id).value;
+  if (ide === '1'){
+    document.getElementById("p"+id).style.display = 'block';
+  }
+}
+
 function calAge(){
   var dob = document.getElementById("date").value;
   if (dob === ''){
@@ -15,28 +22,6 @@ function calAge(){
   else{
     var age = new Date - new Date(dob);
     return age;
-  }
-}
-
-function ageToRet() {
-  var age = calAge();
-  var retAge = document.getElementById("retAge").value;
-  var retAge = document.getElementById("retAge").value;
-  if(age != ''){
-  var to65 = retAge - Math.floor(age / 1000 / 60 / 60 / 24 / 365);
-  document.getElementById("theAge").innerHTML = 'You have ' + to65 +
-  ' years until retirement';
-  }
-}
-
-function calIncome(){
-  var income = document.getElementById("income").value;
-  if (income === ''){
-    document.getElementById("theIncome").innerHTML =
-    'Please enter income(s)';
-  }
-  else{
-  document.getElementById("theIncome").innerHTML = 'You currently make $'+ income;
   }
 }
 
@@ -52,4 +37,49 @@ function popRetAgeSel(){
   else{
     document.getElementById("retAge").innerHTML = '<option value="65">65</option>';
   }
+}
+
+function section1(){
+  var pamAvg = 262000;
+  var le = document.getElementById("LE").value;
+  var numToLE = le - 65;
+  var result = pamAvg / numToLE;
+  return result;
+}
+
+function section2(){
+  var total = 0;
+  var ad = document.getElementById("AD").value;
+  var al = document.getElementById("AL").value;
+  var hs = document.getElementById("HS").value;
+  var iha = document.getElementById("IHA").value;
+  var nhs = document.getElementById("NHS").value;
+  var nhp = document.getElementById("NHP").value;
+  if(ad === '1'){
+    total += document.getElementById("ageAD").value * 17680;
+  }
+  if(al === '1'){
+    total += document.getElementById("ageAL").value * 43539;
+  }
+  if(hs === '1'){
+    total += document.getElementById("ageHS").value * 45760;
+  }
+  if(iha === '1'){
+    total += document.getElementById("ageIHA").value * 46332;
+  }
+  if(nhs === '1'){
+    total += document.getElementById("ageNHS").value * 82125;
+  }
+  if(nhp === '1'){
+    total += document.getElementById("ageNHP").value * 92378;
+  }
+  return total;
+}
+
+function totalCost(){
+  var income = document.getElementById("income").value;
+  var cost = section1() + section2();
+  document.getElementById("theIncome").innerHTML = 'Your income is ' +
+  income + '.<br><br> Total HeathCare Cost is $' +
+  cost;
 }
