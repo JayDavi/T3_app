@@ -134,7 +134,7 @@ function report(){
 
 function section4(){
   var retAge = document.getElementById("retAge").value;
-  var byYear = totalCost()/retAge;
+  var byYear = totalCost()/(retAge-calAge());
   var byMonth = byYear/12;
   var byWeek = byMonth/4;
   var byDay = byWeek/7;
