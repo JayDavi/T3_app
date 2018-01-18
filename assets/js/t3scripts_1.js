@@ -121,7 +121,21 @@ function section3(){
 function totalCost(){
   var income = document.getElementById("income").value;
   var cost = Math.round(100*(section1() + section2() + section3()))/100;
+  return cost;
+}
+
+function report(){
+  var income = document.getElementById("income").value;
+  var cost = totalCost();
   document.getElementById("theIncome").innerHTML = 'Your income is ' +
   income + '.<br><br> Total HeathCare Cost is $' +
   cost + '<br>' +section1() + '<br>' +section2() + '<br>' + section3();
+}
+
+function section4(){
+  var retAge = document.getElementById("retAge").value;
+  var byYear = totalCost()/retAge;
+  var byMonth = byYear/12;
+  var byWeek = byMonth/4;
+  var byDay = byWeek/7;
 }
