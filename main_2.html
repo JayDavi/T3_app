@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>T3</title>
+
+  <link href="assets/css/basic.css" rel="stylesheet">
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/plugins/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/starter-template.css" rel="stylesheet">
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1 class="text-left">Heath Care App</h1>
+      <div class="content">
+
+
+        <!-- <div class="insideL"> -->
+        <div class="container-fluid">
+          <form id="frm1" class='form-horizontal'>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="name">Name:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="Enter your name"><br><br>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="date">DOB:</label>
+              <div class="col-sm-10">
+                <input oninput="popRetAgeSel()" type="date" class="form-control" id="date" placeholder="Enter your date of birth"><br><br>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="income">Income:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="income" placeholder="How much do you make a year?"><br><br>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="retAge">Retirement Age:</label>
+              <div class="col-sm-10">
+                <select id="retAge"></select><br><br>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="LE">Life Expectancy:</label>
+              <div class="col-sm-10">
+                <input type="number" id="LE"><br><br>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="inflRate">Inflation rate:</label>
+              <div class="col-sm-10">
+                <select id="inflRate">
+                  <option value=".02">2%</option>
+                  <option value=".01">1%</option>
+                  <option value=".03">3%</option>
+                  <option value=".04">4%</option>
+                </select><br><br>
+              </div>
+            </div>
+
+            Would you like any of the following Long Term Care Options?<br><br><br><br>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="AD">Adult Daycare:</label>
+              <div class="col-sm-10">
+                <select id="AD" oninput="showThis('AD')">
+                  <option>Select</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select><br><br>
+                <p style ="display: none" id="pAD">At What Age: <input type="number" id="ageAD"><br><br></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="AL">Assisted Living:</label>
+              <div class="col-sm-10">
+                <select id="AL" oninput="showThis('AL')">
+                  <option>Select</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select><br><br>
+                <p style ="display: none" id="pAL">At What Age: <input type="number" id="ageAL"><br><br></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="HS">Homemaker Services:</label>
+              <div class="col-sm-10">
+                <select id="HS" oninput="showThis('HS')">
+                  <option>Select</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select><br><br>
+                <p style ="display: none" id="pHS">At What Age: <input type="number" id="ageHS"><br><br></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="IHA">Inhome Health aid:</label>
+              <div class="col-sm-10">
+                <select id="IHA" oninput="showThis('IHA')">
+                  <option>Select</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select><br><br>
+                <p style ="display: none" id="pIHA">At What Age: <input type="number" id="ageIHA"><br><br></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="NHS">Nursing home (Semi private room):</label>
+              <div class="col-sm-10">
+                <select id="NHS" oninput="showThis('NHS')">
+                  <option>Select</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </select><br><br>
+                <p style ="display: none" id="pNHS">At What Age: <input type="number" id="ageNHS"><br><br></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="NHP">Nursing Home (private room):</label>
+              <div class="col-sm-10">
+                <select id="NHP" oninput="showThis('NHP')">
+                 <option>Select</option>
+                 <option value="0">No</option>
+                 <option value="1">Yes</option>
+               </select><br><br>
+               <p style ="display: none" id="pNHP">At What Age: <input type="number" id="ageNHP"><br><br></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="OS">Would you like to save for other services not covered by Medicare?</label>
+              <div class="col-sm-10">
+                <select id="OS" oninput="showThis('OS')">
+                  <option value='0'>No</option>
+                  <option value='1'>Yes</option>
+                </select><br><br>
+              </div>
+            </div>
+
+                <p style="display: none" id="pOS">
+                    Routine dental care:
+                      <select id="RDC">
+                        <option value='0'>No</option>
+                        <option value='1'>Yes</option>
+                      </select>
+
+
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="HA">Hearing aids:</label>
+                  <div class="col-sm-10">
+                    <select id="HA">
+                      <option value='0'>No</option>
+                      <option value='1'>Yes</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="REE">Routine Eye Exam:</label>
+                  <div class="col-sm-10">
+                    <select id="REE">
+                      <option value='0'>No</option>
+                      <option value='1'>Yes</option>
+                    </select>
+                  </div>
+                </div>
+              </p>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button onclick="greet(), ageToRet(), calIncome()" class="btn btn-default">Done</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+        <!-- </div> insideL-->
+      </div>
+
+
+
+  <!-- This is end of the jumbotron -->
+    </div>
+
+
+  </div>
+
+
+  <!-- /.container -->
+
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+  </script>
+  <script src="../../dist/js/bootstrap.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+  <script src="assets/js/t3scripts_1.js"></script>
+</body>
+
+</html
