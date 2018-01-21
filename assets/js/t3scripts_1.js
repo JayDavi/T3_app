@@ -59,7 +59,7 @@ function calInflation2(num, age){
 }
 
 function section1(){
-  var pamAvg = 262000;
+  var pamAvg = 131000;
   var result = calInflation(pamAvg);
   return result;
 }
@@ -138,4 +138,40 @@ function section4(){
   var byMonth = byYear/12;
   var byWeek = byMonth/4;
   var byDay = byWeek/7;
+}
+
+function placeChart(){
+  var retAge = document.getElementById("retAge").value;
+  var currentAge = calAge();
+  var yearsTo = retAge-currentAge;
+  var save = totalCost()/yearsTo;
+  var labls = [];
+  var year = new Date();
+  for(var i=0; i < yearsTo;i++){
+    labls.push(''+(year.getFullYear() + i));
+  }
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var tdata = [];
+  for(var i=1; i <= yearsTo; i++){
+    tdata.push(save*i);
+  }
+
+  var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'line',
+
+      // The data for our dataset
+      data: {
+          labels: labls,
+          datasets: [{
+              label: "My First dataset",
+              fill: false,
+              borderColor: "red",
+              data: tdata,
+          }]
+      },
+
+      // Configuration options go here
+      options: {}
+  });
 }

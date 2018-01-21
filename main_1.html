@@ -25,7 +25,7 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -143,11 +143,12 @@
                     </select><br><br>
                   </p>
                   </form>
-                  <button onclick="greet(), report()">Done</button>
+                  <button onclick="greet(), report(), placeChart()">Done</button>
                 </div>
               </th>
               <th>
                 <div class="insideR">
+                  <canvas width="500" height="400" id="myChart"></canvas>
                   <h2 id="hello"></h2>
 
                   <h3 id="YtR" style="display: none">Years to Retirement</h3>
