@@ -66,7 +66,7 @@
                 <div class="insideL">
                   <form id="frm1">
                     Name: <input type="text" id="name"><br><br>
-                    DoB: <input oninput="popRetAgeSel()" type="date" id="date"><br><br>
+                    DoB: <input oninput="popRetAgeSel(), sam()" type="date" id="date"><br><br>
                     Income: <input type="text" id="income"><br><br>
                     Growth: <select id="growth">
                       <option value=".03">3%</option>
@@ -84,63 +84,44 @@
                     </select><br><br><br><br>
 
                     Would you like any of the following Long Term Care Options?<br><br>
-                    Adult Daycare: <select id="AD" oninput="showThis('AD')">
-                      <option value="0">No</option>
-                      <option value="1">Yes</option>
-                    </select><br><br>
+                    Adult Daycare: <input type="checkbox" id="AD" onchange="showThis('AD')">
+                      <br><br>
                     <p style ="display: none" id="pAD">At What Age: <input type="number" id="ageAD"><br><br></p>
 
-                    Assisted Living: <select id="AL" oninput="showThis('AL')">
-                      <option value="0">No</option>
-                      <option value="1">Yes</option>
-                    </select><br><br>
+                    Assisted Living: <input type="checkbox" id="AL" onchange="showThis('AL')">
+                      <br><br>
                     <p style ="display: none" id="pAL">At What Age: <input type="number" id="ageAL"><br><br></p>
 
-                    Homemaker Services: <select id="HS" oninput="showThis('HS')">
-                      <option value="0">No</option>
-                      <option value="1">Yes</option>
-                    </select><br><br>
+                    Homemaker Services: <input type="checkbox" id="HS" onchange="showThis('HS')">
+                      <br><br>
                     <p style ="display: none" id="pHS">At What Age: <input type="number" id="ageHS"><br><br></p>
 
-                    Inhome Health aid: <select id="IHA" oninput="showThis('IHA')">
-                      <option value="0">No</option>
-                      <option value="1">Yes</option>
-                    </select><br><br>
+                    Inhome Health aid: <input type="checkbox" id="IHA" oninput="showThis('IHA')" onchange="showThis('IHA')">
+                      <br><br>
                     <p style ="display: none" id="pIHA">At What Age: <input type="number" id="ageIHA"><br><br></p>
 
-                    Nursing home (Semi private room): <select id="NHS" oninput="showThis('NHS')">
-                      <option value="0">No</option>
-                      <option value="1">Yes</option>
-                    </select><br><br>
+                    Nursing home (Semi private room): <input type="checkbox" id="NHS" onchange="showThis('NHS')">
+                      <br><br>
                     <p style ="display: none" id="pNHS">At What Age: <input type="number" id="ageNHS"><br><br></p>
 
-                    Nursing Home (private room): <select id="NHP" oninput="showThis('NHP')">
-                      <option value="0">No</option>
-                      <option value="1">Yes</option>
-                    </select><br><br>
+                    Nursing Home (private room): <input type="checkbox" id="NHP" onchange="showThis('NHP'),sam()">
+                      <p id="sam">p</p>
+                      <br><br>
                     <p style ="display: none" id="pNHP">At What Age: <input type="number" id="ageNHP"><br><br></p>
 
                     Would you like to save for other services not covered by Medicare?
-                    <select id="OS" oninput="showThis('OS')">
-                      <option value='0'>No</option>
-                      <option value='1'>Yes</option>
-                    </select><br><br>
+                    <input type="checkbox" id="OS" onchange="showThis('OS')">
+                      <br><br>
                     <p style="display: none" id="pOS">
 
-                    Routine dental care: <select id="RDC">
-                      <option value='0'>No</option>
-                      <option value='1'>Yes</option>
-                    </select><br><br>
+                    Routine dental care: <input type="checkbox" id="RDC" value="1">
+                      <br><br>
 
-                    Hearing aids: <select id="HA">
-                      <option value='0'>No</option>
-                      <option value='1'>Yes</option>
-                    </select><br><br>
+                    Hearing aids: <input type="checkbox" id="HA" value="1">
+                      <br><br>
 
-                    Routine Eye Exam: <select id="REE">
-                      <option value='0'>No</option>
-                      <option value='1'>Yes</option>
-                    </select><br><br>
+                    Routine Eye Exam: <input type="checkbox" id="REE" value="1">
+                      <br><br>
                   </p>
                   </form>
                   <button onclick="greet(), report(), placeChart()">Done</button>

@@ -1,3 +1,8 @@
+function sam(){
+  var a = document.getElementById("NHP").checked;
+  document.getElementById("sam").innerHTML = a;
+}
+
 
 function greet(){
   var name = document.getElementById("name").value;
@@ -7,12 +12,14 @@ function greet(){
 }
 
 function showThis(id){
-  var ide = document.getElementById(id).value;
-  if (ide === '1'){
+  var ide = document.getElementById(id).checked;
+  if (ide){
     document.getElementById("p"+id).style.display = 'block';
+
   }
   else{
     document.getElementById("p"+id).style.display = 'none';
+
   }
 }
 
@@ -32,7 +39,7 @@ function popRetAgeSel(){
   var currentAge = calAge();
   var selString = '';
   if(currentAge != ''){
-    for(var i=currentAge; i <= 65; i++){
+    for(var i=currentAge; i <= 85; i++){
       selString += '<option value="'+i+'">'+i+'</option>';
     }
     document.getElementById("retAge").innerHTML = selString;
@@ -66,34 +73,34 @@ function section1(){
 
 function section2(){
   var total = 0;
-  var ad = document.getElementById("AD").value;
-  var al = document.getElementById("AL").value;
-  var hs = document.getElementById("HS").value;
-  var iha = document.getElementById("IHA").value;
-  var nhs = document.getElementById("NHS").value;
-  var nhp = document.getElementById("NHP").value;
+  var ad = document.getElementById("AD").checked;
+  var al = document.getElementById("AL").checked;
+  var hs = document.getElementById("HS").checked;
+  var iha = document.getElementById("IHA").checked;
+  var nhs = document.getElementById("NHS").checked;
+  var nhp = document.getElementById("NHP").checked;
   var le = document.getElementById("LE").value;
-  if(ad === '1'){
+  if(ad === true){
     total += calInflation2((le - document.getElementById("ageAD").value) * 17680,
   document.getElementById("ageAD").value);
   }
-  if(al === '1'){
+  if(al === true){
     total += calInflation2((le - document.getElementById("ageAL").value) * 43539,
   document.getElementById("ageAL").value);
   }
-  if(hs === '1'){
+  if(hs === true){
     total += calInflation2((le - document.getElementById("ageHS").value) * 45760,
   document.getElementById("ageHS").value);
   }
-  if(iha === '1'){
+  if(iha === true){
     total += calInflation2((le - document.getElementById("ageIHA").value) * 46332,
   document.getElementById("ageIHA").value);
   }
-  if(nhs === '1'){
+  if(nhs === true){
     total += calInflation2((le - document.getElementById("ageNHS").value) * 82125,
   document.getElementById("ageNHS").value);
   }
-  if(nhp === '1'){
+  if(nhp === true){
     total += calInflation2((le - document.getElementById("ageNHP").value) * 92378,
   document.getElementById("ageNHP").value);
   }
@@ -147,13 +154,13 @@ function placeChart(){
   var save = totalCost()/yearsTo;
   var labls = [];
   var year = new Date();
-  for(var i=0; i < yearsTo;i++){
+  for(var i=1; i < yearsTo;i+=10){
     labls.push(''+(year.getFullYear() + i));
   }
   var ctx = document.getElementById('myChart').getContext('2d');
   var tdata = [];
   for(var i=1; i <= yearsTo; i++){
-    tdata.push(save*i);
+    tdata.push(Math.round(100*save*i)/100);
   }
 
   var chart = new Chart(ctx, {
@@ -172,6 +179,15 @@ function placeChart(){
       },
 
       // Configuration options go here
-      options: {}
+      options: {
+  scales: {
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Dollars'
+      }
+    }]
+  }
+}
   });
 }
