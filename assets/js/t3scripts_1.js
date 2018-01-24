@@ -80,27 +80,27 @@ function section2(){
   var nhs = document.getElementById("NHS").checked;
   var nhp = document.getElementById("NHP").checked;
   var le = document.getElementById("LE").value;
-  if(ad === true){
+  if(ad){
     total += calInflation2((le - document.getElementById("ageAD").value) * 17680,
   document.getElementById("ageAD").value);
   }
-  if(al === true){
+  if(al){
     total += calInflation2((le - document.getElementById("ageAL").value) * 43539,
   document.getElementById("ageAL").value);
   }
-  if(hs === true){
+  if(hs){
     total += calInflation2((le - document.getElementById("ageHS").value) * 45760,
   document.getElementById("ageHS").value);
   }
-  if(iha === true){
+  if(iha){
     total += calInflation2((le - document.getElementById("ageIHA").value) * 46332,
   document.getElementById("ageIHA").value);
   }
-  if(nhs === true){
+  if(nhs){
     total += calInflation2((le - document.getElementById("ageNHS").value) * 82125,
   document.getElementById("ageNHS").value);
   }
-  if(nhp === true){
+  if(nhp){
     total += calInflation2((le - document.getElementById("ageNHP").value) * 92378,
   document.getElementById("ageNHP").value);
   }
@@ -110,16 +110,16 @@ function section2(){
 
 function section3(){
   var total = 0;
-  var rdc = document.getElementById("RDC").value;
-  var ha = document.getElementById("HA").value;
-  var ree = document.getElementById("REE").value;
-  if(rdc === '1'){
+  var rdc = document.getElementById("RDC").checked;
+  var ha = document.getElementById("HA").checked;
+  var ree = document.getElementById("REE").checked;
+  if(rdc){
     total += 288;
   }
-  if(ha === '1'){
+  if(ha){
     total += 3000/5;
   }
-  if(ree === '1'){
+  if(ree){
     total += 200;
   }
   return calInflation(total);
@@ -171,7 +171,7 @@ function placeChart(){
       data: {
           labels: labls,
           datasets: [{
-              label: "My First dataset",
+              label: "PAM",
               fill: false,
               borderColor: "red",
               data: tdata,
@@ -180,14 +180,18 @@ function placeChart(){
 
       // Configuration options go here
       options: {
-  scales: {
-    yAxes: [{
-      scaleLabel: {
-        display: true,
-        labelString: 'Dollars'
+        title: {
+          display: true,
+          text: 'Amount to Save (by thosands)'
+        },
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Dollars'
+            }
+          }]
+        }
       }
-    }]
-  }
-}
-  });
+    });
 }
