@@ -1,9 +1,7 @@
 function sam(){
-  var a = document.getElementById("NHP").checked;
-  document.getElementById("sam").innerHTML = a;
+  var s = document.getElementById("inflRate").value;
+  document.getElementById("get").innerHTML = s;
 }
-
-
 function greet(){
   var name = document.getElementById("name").value;
   document.getElementById("hello").innerHTML = 'Hello ' + name;
@@ -40,7 +38,12 @@ function popRetAgeSel(){
   var selString = '';
   if(currentAge != ''){
     for(var i=currentAge; i <= 85; i++){
-      selString += '<option value="'+i+'">'+i+'</option>';
+      if(i != 65){
+        selString += '<option value="'+i+'">'+i+'</option>';
+      }
+      else{
+        selString += '<option value="'+i+'"selected>'+i+'</option>';
+      }
     }
     document.getElementById("retAge").innerHTML = selString;
   }
@@ -49,11 +52,38 @@ function popRetAgeSel(){
   }
 }
 
+function popOp(){
+  var s = '';
+  for(var i=1; i<=100;i++){
+    var perc = i/100;
+    if(i != 2){
+      s += '<option value="'+perc+'">'+i+'%</option>';
+    }
+    else{
+    s += '<option value="'+perc+'"selected>'+i+'%</option>';
+  }
+  }
+  document.getElementById("inflRate").innerHTML = s;
+}
+
+function popOp2(){
+  var s = '';
+  for(var i=1; i<=100;i++){
+    if(i != 3){
+      s += '<option value="'+(i/100)+'">'+i+'%</option>';
+    }
+    else{
+    s += '<option value="'+(i/100)+'"selected>'+i+'%</option>';
+  }
+  }
+  document.getElementById("growth").innerHTML = s;
+}
+
 function calInflation(num){
   var re = document.getElementById("retAge").value;
   var inflation = document.getElementById("inflRate").value;
   var numToLE = re - calAge();
-  var result = num*Math.pow(1+inflation,numToLE);
+  var result = num*Math.pow(1+ +inflation,numToLE);
   return Math.round(100*result)/100;
 }
 
@@ -61,7 +91,7 @@ function calInflation2(num, age){
   var re = document.getElementById("retAge").value;
   var inflation = document.getElementById("inflRate").value;
   var numToLE = age - calAge();
-  var result = num*Math.pow(1+inflation,numToLE);
+  var result = num*Math.pow(1+ +inflation,numToLE);
   return Math.round(100*result)/100;
 }
 
@@ -149,18 +179,51 @@ function section4(){
 
 function placeChart(){
   var retAge = document.getElementById("retAge").value;
+  var le = document.getElementById("LE").value;
   var currentAge = calAge();
-  var yearsTo = retAge-currentAge;
-  var save = totalCost()/yearsTo;
+  var yearsToRet = retAge - currentAge;
+  var yearsToLE = le - currentAge;
+  var fromRetToLE = le - retAge;
+  var save = totalCost()/yearsToLE;
   var labls = [];
-  var year = new Date();
-  for(var i=1; i < yearsTo;i+=10){
-    labls.push(''+(year.getFullYear() + i));
+  labls.push(+currentAge + 1);
+  var num = Math.ceil(Math.round(currentAge / 10) *10);
+  for(var i=0; i < Math.floor(yearsToLE/5); i++){
+    if(num+5*i != +currentAge + 1)
+    labls.push(num+5*i);
+  }
+  if(labls[labls.length-1] != le){
+  labls.push(le);
   }
   var ctx = document.getElementById('myChart').getContext('2d');
-  var tdata = [];
-  for(var i=1; i <= yearsTo; i++){
-    tdata.push(Math.round(100*save*i)/100);
+  var pdata = {};
+  var fpdata = [];
+  var psave = section1()/yearsToRet;
+  for(var i=0; i <= yearsToRet; i++){
+    pdata[+currentAge+i] = Math.round(100*psave*i)/100;
+  }
+  for(var i=0; i < labls.length; i++){
+    fpdata.push(pdata[labls[i]]);
+  }
+
+  var ldata = {};
+  var fldata = [];
+  var lsave = section2()/yearsToRet;
+  for(var i=0; i <= yearsToRet; i++){
+    ldata[+currentAge+i] = Math.round(100*lsave*i)/100;
+  }
+  for(var i=0; i < labls.length; i++){
+    fldata.push(ldata[labls[i]]);
+  }
+
+  var rdata = {};
+  var frdata = [];
+  var rsave = section3()/yearsToRet;
+  for(var i=0; i <= yearsToRet; i++){
+    rdata[+currentAge+i] = Math.round(100*rsave*i)/100;
+  }
+  for(var i=0; i < labls.length; i++){
+    frdata.push(rdata[labls[i]]);
   }
 
   var chart = new Chart(ctx, {
@@ -174,7 +237,17 @@ function placeChart(){
               label: "PAM",
               fill: false,
               borderColor: "red",
-              data: tdata,
+              data: fpdata,
+          },{
+              label: "LTC",
+              fill: false,
+              borderColor: "blue",
+              data: fldata,
+          },{
+              label: "NCM",
+              fill: false,
+              borderColor: "green",
+              data: frdata,
           }]
       },
 
@@ -194,4 +267,8 @@ function placeChart(){
         }
       }
     });
+}
+
+function showDiv(id){
+  document.getElementById(id).style.display = 'block';
 }

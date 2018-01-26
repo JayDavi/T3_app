@@ -33,7 +33,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body onload="popOp(), popOp2()">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -65,24 +65,15 @@
               <th>
                 <div class="insideL">
                   <form id="frm1">
-                    Name: <input type="text" id="name"><br><br>
-                    DoB: <input oninput="popRetAgeSel(), sam()" type="date" id="date"><br><br>
+                    Name: <input type="text" oninput="sam()" id="name"><br><br>
+                    DoB: <input oninput="popRetAgeSel()" type="date" id="date"><br><br>
                     Income: <input type="text" id="income"><br><br>
                     Growth: <select id="growth">
-                      <option value=".03">3%</option>
-                      <option value=".02">2%</option>
-                      <option value=".01">1%</option>
-                      <option value=".04">4%</option>
                     </select><br><br>
                     Retirement Age: <select id="retAge"></select><br><br>
                     Life Expectancy: <input type="number" id="LE"><br><br>
-                    Inflation rate: <select id="inflRate">
-                      <option value=".02">2%</option>
-                      <option value=".01">1%</option>
-                      <option value=".03">3%</option>
-                      <option value=".04">4%</option>
-                    </select><br><br><br><br>
-
+                    Inflation rate: <select id="inflRate"></select><br><br><br><br>
+                    <p id="get"></p>
                     Would you like any of the following Long Term Care Options?<br><br>
                     Adult Daycare: <input type="checkbox" id="AD" onchange="showThis('AD')">
                       <br><br>
@@ -104,8 +95,7 @@
                       <br><br>
                     <p style ="display: none" id="pNHS">At What Age: <input type="number" id="ageNHS"><br><br></p>
 
-                    Nursing Home (private room): <input type="checkbox" id="NHP" onchange="showThis('NHP'),sam()">
-                      <p id="sam">p</p>
+                    Nursing Home (private room): <input type="checkbox" id="NHP" onchange="showThis('NHP')">
                       <br><br>
                     <p style ="display: none" id="pNHP">At What Age: <input type="number" id="ageNHP"><br><br></p>
 
@@ -129,7 +119,7 @@
               </th>
               <th>
                 <div class="insideR">
-                  <canvas width="500" height="400" id="myChart"></canvas>
+                  <canvas id="myChart"></canvas>
                   <h2 id="hello"></h2>
 
                   <h3 id="YtR" style="display: none">Years to Retirement</h3>
