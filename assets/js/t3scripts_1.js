@@ -101,6 +101,8 @@ function section1(){
   return result;
 }
 
+var agel = [];
+var subs = 0;
 function section2(){
   var total = 0;
   var ad = document.getElementById("AD").checked;
@@ -111,32 +113,39 @@ function section2(){
   var nhp = document.getElementById("NHP").checked;
   var le = document.getElementById("LE").value;
   if(ad){
-    total += calInflation2((le - document.getElementById("ageAD").value) * 17680,
-  document.getElementById("ageAD").value);
+    total += (le - document.getElementById("ageAD").value) * 17680;
+    agel.push(document.getElementById("ageAD").value);
+    subs += le - document.getElementById("ageAD").value;
   }
   if(al){
-    total += calInflation2((le - document.getElementById("ageAL").value) * 43539,
-  document.getElementById("ageAL").value);
+    total += (le - document.getElementById("ageAL").value) * 43539;
+    agel.push(document.getElementById("ageAL").value);
+    subs += le - document.getElementById("ageAL").value;
   }
   if(hs){
-    total += calInflation2((le - document.getElementById("ageHS").value) * 45760,
-  document.getElementById("ageHS").value);
+    total += (le - document.getElementById("ageHS").value) * 45760;
+    agel.push(document.getElementById("ageHS").value);
+    subs += le - document.getElementById("ageHS").value;
   }
   if(iha){
-    total += calInflation2((le - document.getElementById("ageIHA").value) * 46332,
-  document.getElementById("ageIHA").value);
+    total += (le - document.getElementById("ageIHA").value) * 46332;
+    agel.push(document.getElementById("ageIHA").value);
+    subs += le - document.getElementById("ageIHA").value;
   }
   if(nhs){
-    total += calInflation2((le - document.getElementById("ageNHS").value) * 82125,
-  document.getElementById("ageNHS").value);
+    total += (le - document.getElementById("ageNHS").value) * 82125;
+    agel.push(document.getElementById("ageNHS").value);
+    subs += le - document.getElementById("ageNHS").value;
   }
   if(nhp){
-    total += calInflation2((le - document.getElementById("ageNHP").value) * 92378,
-  document.getElementById("ageNHP").value);
+    total += (le - document.getElementById("ageNHP").value) * 92378;
+    agel.push(document.getElementById("ageNHP").value);
+    subs += le - document.getElementById("ageNHP").value;
   }
-
-  return total;
+  var num = Math.min(...agel);
+  return calInflation2(total, num);
 }
+
 
 function section3(){
   var total = 0;
@@ -147,7 +156,7 @@ function section3(){
     total += 288;
   }
   if(ha){
-    total += 3000/5;
+    total += 1950/5;
   }
   if(ree){
     total += 200;
@@ -166,7 +175,8 @@ function report(){
   var cost = totalCost();
   document.getElementById("theIncome").innerHTML = 'Your income is ' +
   income + '.<br><br> Total HeathCare Cost is $' +
-  cost + '<br>' +section1() + '<br>' +section2() + '<br>' + section3();
+  cost + '<br>Preniums Above Medicare Cost: $' +section1() + '<br>Long Term Care $'
+  +section2() + '<br>Not Covered Under Medicare: $' + section3();
 }
 
 function section4(){
@@ -178,19 +188,23 @@ function section4(){
 }
 
 function placeChart(){
+  var sec1 = section1();
+  var sec2 = section2();
+  var sec3 = section3();
   var retAge = document.getElementById("retAge").value;
   var le = document.getElementById("LE").value;
   var currentAge = calAge();
   var yearsToRet = retAge - currentAge;
   var yearsToLE = le - currentAge;
   var fromRetToLE = le - retAge;
-  var save = totalCost()/yearsToLE;
+  var ageLTC = Math.min(...agel);
   var labls = [];
-  labls.push(+currentAge + 1);
-  var num = Math.ceil(Math.round(currentAge / 10) *10);
-  for(var i=0; i < Math.floor(yearsToLE/5); i++){
-    if(num+5*i != +currentAge + 1)
-    labls.push(num+5*i);
+  labls.push(+retAge + 1);
+  var num = Math.ceil(Math.round(retAge / 10) *10);
+  for(var i=0; i < Math.floor(fromRetToLE/5); i++){
+    if(num+5*i != +retAge + 1){
+      labls.push(num+5*i);
+    }
   }
   if(labls[labls.length-1] != le){
   labls.push(le);
@@ -198,9 +212,9 @@ function placeChart(){
   var ctx = document.getElementById('myChart').getContext('2d');
   var pdata = {};
   var fpdata = [];
-  var psave = section1()/yearsToRet;
-  for(var i=0; i <= yearsToRet; i++){
-    pdata[+currentAge+i] = Math.round(100*psave*i)/100;
+  var psave = section1();
+  for(var i=0; i <= fromRetToLE; i++){
+    pdata[+retAge+i] = Math.round(100*psave+ +psave*i)/100;
   }
   for(var i=0; i < labls.length; i++){
     fpdata.push(pdata[labls[i]]);
@@ -209,8 +223,16 @@ function placeChart(){
   var ldata = {};
   var fldata = [];
   var lsave = section2()/yearsToRet;
-  for(var i=0; i <= yearsToRet; i++){
-    ldata[+currentAge+i] = Math.round(100*lsave*i)/100;
+  for(var i=0; i <= fromRetToLE; i++){
+    if(+retAge+i < ageLTC){
+      ldata[+retAge+i] = 0;
+    }
+    else{
+      if(subs != 0){
+      ldata[+retAge+i] = Math.round(100*(sec2/ +subs)+ (sec2/ +subs)*i)/100;
+    }
+    else{ldata[+retAge+i] = 0;}
+    }
   }
   for(var i=0; i < labls.length; i++){
     fldata.push(ldata[labls[i]]);
@@ -219,8 +241,8 @@ function placeChart(){
   var rdata = {};
   var frdata = [];
   var rsave = section3()/yearsToRet;
-  for(var i=0; i <= yearsToRet; i++){
-    rdata[+currentAge+i] = Math.round(100*rsave*i)/100;
+  for(var i=0; i <= fromRetToLE; i++){
+    rdata[+retAge+i] = Math.round(100*sec3 + sec3*i)/100;
   }
   for(var i=0; i < labls.length; i++){
     frdata.push(rdata[labls[i]]);
@@ -234,17 +256,17 @@ function placeChart(){
       data: {
           labels: labls,
           datasets: [{
-              label: "PAM",
+              label: "Preniums Above Medicare",
               fill: false,
               borderColor: "red",
               data: fpdata,
           },{
-              label: "LTC",
+              label: "Long Term Care",
               fill: false,
               borderColor: "blue",
               data: fldata,
           },{
-              label: "NCM",
+              label: "Not Covered Under Medicare",
               fill: false,
               borderColor: "green",
               data: frdata,
@@ -272,3 +294,63 @@ function placeChart(){
 function showDiv(id){
   document.getElementById(id).style.display = 'block';
 }
+
+var $form = $( "#flex" );
+
+    var $input = $form.find( "input" );
+
+
+
+    $input.on( "keyup", function( event ) {
+
+
+
+
+
+        // When user select text in the document, also abort.
+
+        var selection = window.getSelection().toString();
+
+        if ( selection !== '' ) {
+
+            return;
+
+        }
+
+
+
+        // When the arrow keys are pressed, abort.
+
+        if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+
+            return;
+
+        }
+
+
+
+
+
+        var $this = $( this );
+
+
+
+        // Get the value.
+
+        var input = $this.val();
+
+
+
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+
+                input = input ? parseInt( input, 10 ) : 0;
+
+
+
+                $this.val( function() {
+
+                    return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+
+                } );
+
+    } );
