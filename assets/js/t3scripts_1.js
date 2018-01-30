@@ -5,8 +5,6 @@ function sam(){
 function greet(){
   var name = document.getElementById("name").value;
   document.getElementById("hello").innerHTML = 'Hello ' + name;
-  document.getElementById("YtR").style.display = 'block';
-  document.getElementById("Income").style.display = 'block';
 }
 
 function showThis(id){
@@ -170,21 +168,32 @@ function totalCost(){
   return cost;
 }
 
-function report(){
-  var income = document.getElementById("income").value;
-  var cost = totalCost();
-  document.getElementById("theIncome").innerHTML = 'Your income is ' +
-  income + '.<br><br> Total HeathCare Cost is $' +
-  cost + '<br>Preniums Above Medicare Cost: $' +section1() + '<br>Long Term Care $'
-  +section2() + '<br>Not Covered Under Medicare: $' + section3();
-}
-
+var byYear;
+var byMonth;
+var byWeek;
+var byDay;
 function section4(){
   var retAge = document.getElementById("retAge").value;
-  var byYear = totalCost()/(retAge-calAge());
-  var byMonth = byYear/12;
-  var byWeek = byMonth/4;
-  var byDay = byWeek/7;
+  byYear = Math.round(100*(totalCost()/(retAge-calAge())))/100;
+  byMonth = Math.round(100*(byYear/12))/100;
+  byWeek = Math.round(100*(byMonth/4))/100;
+  byDay = Math.round(100*(byWeek/7))/100;
+}
+
+function report(){
+  section4();
+  var income = document.getElementById("income").value;
+  var cost = totalCost();
+  document.getElementById("theIncome").innerHTML = 'Total HeathCare Cost:  &nbsp;&nbsp; $' +
+  cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '<br>Preniums Above Medicare Cost: &nbsp;&nbsp; $' +
+  section1().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '<br>Long Term Care:  &nbsp;&nbsp; $' +
+  section2().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '<br>Not Covered Under Medicare:  &nbsp;&nbsp; $' +
+  section3().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+  '<br><br>' + 'To Live Comfortably Save... <br>$' +
+  byYear.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' a year<br>$' +
+  byMonth.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' a month<br>$' +
+  byWeek.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' a week<br>$' +
+  byDay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' a day<br>';
 }
 
 function placeChart(){
@@ -199,10 +208,10 @@ function placeChart(){
   var fromRetToLE = le - retAge;
   var ageLTC = Math.min(...agel);
   var labls = [];
-  labls.push(+retAge + 1);
+  labls.push(+retAge);
   var num = Math.ceil(Math.round(retAge / 10) *10);
   for(var i=0; i < Math.floor(fromRetToLE/5); i++){
-    if(num+5*i != +retAge + 1){
+    if(num+5*i != +retAge){
       labls.push(num+5*i);
     }
   }
@@ -277,13 +286,14 @@ function placeChart(){
       options: {
         title: {
           display: true,
-          text: 'Amount to Save (by thosands)'
+          text: 'Amount to Save (by Thousands)'
         },
         scales: {
           yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Dollars'
+            ticks: {
+              callback: function(label, index, labels) {
+                return '$' + label/1000+'k';
+              }
             }
           }]
         }
@@ -296,61 +306,25 @@ function showDiv(id){
 }
 
 var $form = $( "#flex" );
-
     var $input = $form.find( "input" );
-
-
-
     $input.on( "keyup", function( event ) {
-
-
-
-
-
         // When user select text in the document, also abort.
-
         var selection = window.getSelection().toString();
-
         if ( selection !== '' ) {
-
             return;
-
         }
-
-
 
         // When the arrow keys are pressed, abort.
-
         if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
-
             return;
-
         }
-
-
-
-
-
         var $this = $( this );
-
-
-
         // Get the value.
-
         var input = $this.val();
 
-
-
         var input = input.replace(/[\D\s\._\-]+/g, "");
-
                 input = input ? parseInt( input, 10 ) : 0;
-
-
-
                 $this.val( function() {
-
                     return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
-
                 } );
-
     } );
