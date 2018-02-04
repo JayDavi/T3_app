@@ -1,861 +1,278 @@
 <!DOCTYPE html>
-
-
-
 <html lang="en">
 
-
-
-
-
-
-
 <head>
-
-
-
   <meta charset="utf-8">
-
-
-
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-
-
   <meta name="description" content="">
-
-
-
   <meta name="author" content="">
-
-
-
   <link rel="icon" href="../../favicon.ico">
 
-
-
-
-
-
-
-  <title>T3</title>
-
-
-
-
-
-
+  <title>Medi4</title>
 
   <link href="assets/css/basic.css" rel="stylesheet">
 
-
-
-
-
-
-
   <!-- Bootstrap core CSS -->
-
-
-
   <link href="assets/plugins/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-
-
-
-
-
-
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-
-
-
   <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-
-
-
-
-
-
   <!-- Custom styles for this template -->
-
-
-
   <link href="assets/css/starter-template.css" rel="stylesheet">
-
-
-
-
-
-
 
   <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 
-
-
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-
-
   <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
-
-
-
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 
-
-
   <!--[if lt IE 9]>
-
-
 
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 
-
-
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-
-
     <![endif]-->
-
-
-
 </head>
 
-
-
-
-
-
-
 <body onload="popOp(),popOp2()">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="container">
-
-
 
     <h1 class="text-left">Medi4</h1>
 
-
-
-
-
-
-
     <div class="jumbotron">
-
-
-
-
-
-
-
       <div class="content">
 
-
-
-
-
-
-
-
-
-
-
         <!-- <div class="insideL"> -->
-
-
-
         <div class="container-fluid">
-
-
-
           <form id="frm1" class='form-horizontal'>
-
-
-
-
-
-
-
             <div class="form-group">
-
-
-
               <label class="control-label col-sm-2" for="name">Name:</label>
-
-
-
               <div class="col-sm-4">
-
-
-
                 <input type="text" class="form-control" id="name" placeholder="Enter your name"><br>
-
-
-
               </div>
-
-
-
             </div>
 
-
-
-
-
-
-
             <div class="form-group">
-
-
-
-              <label class="control-label col-sm-2" for="date">DOB:</label>
-
-
-
+              <label class="control-label col-sm-2" for="date">Date Of Birth:</label>
               <div class="col-sm-3">
-
-
-
-                <input oninput="popRetAgeSel()" type="date" class="form-control" id="date" placeholder="Enter your date of birth"><br>
-
-
-
-              </div>
-
-
-
+                <input oninput="popRetAgeSel()" type="date" class="form-control" id="date" placeholder="Enter your date of birth" required><br>
             </div>
-
-
-
-
-
-
+          </div>
 
             <div class="form-group">
-
-
-
               <label class="control-label col-sm-2" for="income">Income:</label>
-
-
-
               <div id="flex" class="col-sm-3">
-
-
-
                 <div class="input-group">
-
-
-
                   <span class="input-group-addon">$</span>
-
-
-
-                  <input id="income" class="form-control" name="amount" type="text" maxlength="15" />
-
-
-
+                  <input id="income" class="form-control" name="amount" type="text" maxlength="15" required/>
                 </div>
-
-
-
               </div>
-
-
-
-            </div>
-
-
+          </div>
 
             <br>
 
-
-
             <div class="form-group">
-
-
-
               <label class="control-label col-sm-2" for="inflRate">Growth:</label>
-
-
-
               <div class="col-sm-2">
-
-
-
                 <select class="form-control" id="growth">
-
                 </select><br>
-
-
-
               </div>
-
-
-
             </div>
-
-
 
             <br>
 
-
-
             <div class="form-group">
-
-
-
               <label class="control-label col-sm-2" for="retAge">Retirement Age:</label>
-
-
-
               <div class="col-sm-2">
-
-
-
                 <select class="form-control" id="retAge"></select><br>
-
-
-
               </div>
-
-
-
             </div>
 
-
-
-
-
-
-
             <div class="form-group">
-
-
-
               <label class="control-label col-sm-2" for="LE">Life Expectancy:</label>
-
-
-
               <div class="col-sm-2">
-
-
-
-                <input class="form-control" type="number" id="LE"><br>
-
-
-
+                <input class="form-control" type="number" id="LE" required><br>
               </div>
-
-
-
             </div>
-
-
-
-
-
-
 
             <div class="form-group">
-
-
-
               <label class="control-label col-sm-2" for="inflRate">Inflation rate:</label>
-
-
-
               <div class="col-sm-2">
-
-
-
                 <select class="form-control" id="inflRate">
-
                 </select><br>
-
-
-
               </div>
-
-
-
             </div>
-
-
-
-          </form>
-
-
 
           <div class="row">
-
-
-
             <div class="col-sm-4">
-
-
-
               Would you like any Long Term Care Options?
-
-
-
             </div>
 
             <div class="col-sm-1">
-
               <div class="radio">
-
                 <input type="radio" name="lt0" onclick="showDiv('LTC')" />Yes
-
               </div>
-
             </div>
-
-
 
             <div class="col-sm-1">
-
               <div class="radio">
-
                 <input type="radio" name="lt0" onclick="showDiv('ques')" />No
-
               </div>
-
             </div>
-
             <br><br>
-
-
-
-          </div>
-
-
+        </div>
 
           <div class="row" style="display:none" id="ques">
-
             <div class="col-sm-4">
-
               Would you like to save for other services not covered by Medicare?
-
             </div>
-
             <div class="radio">
-
               <div class="col-sm-1">
-
                 <label data-toggle="collapse" data-target="#question2">
-
-
-
                   <input type="radio" name="optO" onclick="showDiv('NotCov')"/>Yes
-
-
-
                 </label>
-
               </div>
 
               <div class="col-sm-1">
-
                 <label data-toggle="collapse" data-target="#">
-
-
-
-                  <input type="radio" name="optO" onclick="showDiv('res'), greet(),  report(), placeChart()"/>No
-
-
-
+                  <input type="radio" type="submit" name="optO" value="Submit" onclick="if(validateForm()){showDiv('res'), greet(),  report(), placeChart()}"/>No
                 </label>
-
               </div>
-
-
-
-
-
-
-
-
-
             </div>
-
-
 
             <!-- </div> insideL-->
-
-
-
           </div>
 
-
-
           <!-- This is end of the jumbotron -->
-
+          </form>
         </div>
 
         <!--content -->
-
-
-
       </div>
 
-
-
       <!-- /.container -->
-
     </div>
-
   </div>
 
   <div class="container" style="display: none" id="LTC">
-
-
-
-
-
     <div class="jumbotron">
-
-
-
       <div class="content">
-
         <div class="container-fluid">
-
-
-
           <div class="well">
-
-
-
             <input type="checkbox" id="AD" onchange="showThis('AD')"> Adult Daycare &nbsp;&nbsp;
-
             <br><br>
-
             <p style="font-size:90%; display: none" id="pAD">At What Age: <input type="number" id="ageAD"><br><br></p>
 
             <input type="checkbox" id="AL" onchange="showThis('AL')"> Assisted Living &nbsp;&nbsp;
-
             <br><br>
-
             <p style="display: none; font-size:90%" id="pAL">At What Age: <input type="number" id="ageAL"><br><br></p>
 
-
-
             <input type="checkbox" id="HS" onchange="showThis('HS')"> Homemaker Services: &nbsp;&nbsp;
-
             <br><br>
-
             <p style="display: none; font-size:90%" id="pHS">At What Age: <input type="number" id="ageHS"><br><br></p>
 
-
-
             <input type="checkbox" id="IHA" oninput="showThis('IHA')" onchange="showThis('IHA')"> Inhome Health aid: &nbsp;&nbsp;
-
             <br><br>
-
             <p style="display: none; font-size:90%" id="pIHA">At What Age: <input type="number" id="ageIHA"><br><br></p>
 
-
-
             <input type="checkbox" id="NHS" onchange="showThis('NHS')"> Nursing home (Semi private room): &nbsp;&nbsp;
-
             <br><br>
-
             <p style="display: none; font-size:90%" id="pNHS">At What Age: <input type="number" id="ageNHS"><br><br></p>
 
-
-
             <input type="checkbox" id="NHP" onchange="showThis('NHP')"> Nursing Home (private room): &nbsp;&nbsp;
-
             <br>
-
             <p style="display: none; font-size:90%" id="pNHP">At What Age: <input type="number" id="ageNHP"><br><br></p>
-
-
-
           </div>
-
-
 
         <div class="well">
-
           <div class="container-fluid">
-
             <div class="col-sm-4">
-
               Would you like to save for other services not covered by Medicare?
-
             </div>
-
-
 
             <div class="radio">
-
               <div class="col-sm-1">
-
                 <label data-toggle="collapse" data-target="#question2">
-
-
-
                 <input type="radio" name="optO" onclick="showDiv('NotCov')"/>Yes
-
-
-
               </label>
-
               </div>
 
-
-
               <div class="col-sm-1">
-
                 <label data-toggle="collapse" data-target="#">
-
-
-
                 <input type="radio" name="optO" onclick="showDiv('res'), greet(),  report(), placeChart()"/>No
-
-
-
               </label>
-
             </div>
-
             </div>
-
-
-
           </div>
-
           </div>
-
-
-
         </div>
       </div>
     </div>
   </div>
 
-
-
       <div class="container" style="display: none" id="NotCov">
-
-
-
         <div id="question2" class="collapse"><br>
           <div class="jumbotron">
-
-
-
             <div class="content">
-
-
          <div class="well">
 
             <div class="container-fluid">
-
               <input type="checkbox" id="RDC" value="1"> Routine dental care
-
               <br><br>
-
-
-
               <input type="checkbox" id="HA" value="1"> Hearing aids
-
               <br><br>
-
-
-
               <input type="checkbox" id="REE" value="1"> Routine Eye Exam
-
               <br>
-
             </div>
-
           </div>
-
-
-
         </div>
-
-
 
         <div class="form-group">
-
-
-
           <div class="">
-
-
-
-            <button onclick="showDiv('res'), greet(),  report(), placeChart()" class="btn btn-default">Done</button>
-
-
-
+            <button onclick="if(validateForm()){showDiv('res'), greet(),  report(), placeChart()}" class="btn btn-default">Done</button>
           </div>
-
         </div>
-
       </div>
 </div>
 </div>
-
-
-
-
 
   <div class="container" style="display: none" id="res">
-
-
-
     <div class="jumbotron">
-
-
-
       <div class="content">
-
-
-
         <div class="container-fluid">
-
           <div class="col-sm-6">
-
           <canvas width="500" height="400" id="myChart"></canvas>
-
           </div>
-
-
 
           <div class="col-sm-6">
-
             <h2 id="hello"></h2>
-
-            
-
             <p id="theIncome"></p>
-
           </div>
-
         </div>
-
-
-
-
-
       </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- Bootstrap core JavaScript
-
-
-
     ================================================== -->
-
-
-
   <!-- Placed at the end of the document so the pages load faster -->
 
-
-
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-
-
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-
-
   <script>
-
     window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
-
   </script>
-
-
-
   <script src="../../dist/js/bootstrap.min.js"></script>
-
-
-
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-
-
-
   <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-
-
-
   <script src="assets/js/t3scripts_1.js"></script>
-
-
-
 </body>
-
-
-
-
-
-
-
 </html>

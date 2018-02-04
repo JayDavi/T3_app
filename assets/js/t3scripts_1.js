@@ -1,11 +1,34 @@
-function sam(){
-  var s = document.getElementById("inflRate").value;
-  document.getElementById("get").innerHTML = s;
-}
 function greet(){
   var name = document.getElementById("name").value;
   document.getElementById("hello").innerHTML = 'Hello ' + name;
 }
+
+function validateForm() {
+  var dob = document.forms["frm1"]["date"].value;
+  var income = document.forms["frm1"]["amount"].value;
+  var lifeE = document.forms["frm1"]["LE"].value;
+  var status = true;
+  var str = '';
+
+  if (dob === ''){
+    str += "fill Date of Birth feild\n";
+    status = false;
+  }
+  if (income === ''){
+    str += "fill income feild\n";
+    status = false;
+  }
+  if (lifeE === ''){
+    str += "fill Life Expectancy feild";
+    status = false;
+  }
+
+  if(!status){
+    alert(str);
+  }
+  return status;
+}
+
 
 function showThis(id){
   var ide = document.getElementById(id).checked;

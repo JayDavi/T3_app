@@ -1,21 +1,183 @@
-body {
-  background: white;
+@font-face {
+
+    font-family: "fontawesome-webfont";
+
+    src: url( "../fonts/fontawesome-webfont.eot" );
+
+               src: local("fontawesome-webfont"),
+
+                   url("../fonts/fontawesome-webfont.woff") format('woff'),
+
+                   url("../fonts/fontawesome-webfont.otf") format("opentype");
+
 }
 
-.content {
+
+
+body {
+
+
+
+    padding-top: 20px;
+
+    padding-right: 80px;
+
+    padding-bottom: 20px;
+
+    padding-left: 80px;
+
+
+
+
+
+    background: -moz-radial-gradient(center, ellipse cover, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* ff3.6+ */
+
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(28,144,176,1)), color-stop(72%, rgba(180,216,232,1)), color-stop(100%, rgba(240,245,255,1))); /* safari4+,chrome */
+
+    background:-webkit-radial-gradient(center, ellipse cover, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* safari5.1+,chrome10+ */
+
+    background: -o-radial-gradient(center, ellipse cover, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* opera 11.10+ */
+
+    background: -ms-radial-gradient(center, ellipse cover, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* ie10+ */
+
+    background:radial-gradient(ellipse at center, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* w3c */
+
+
+
+
+
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1C90B0', endColorstr='#F0F5FF',GradientType=1 ); /* ie6-9 */
+
+
+
+}
+
+
+
+/* .content {
+
   max-width: 3000px;
+
   margin: 0px;
+
   background: white;
+
   padding-top: 15px;
-}
+
+} */
+
 .insideL {
+
   max-width: 500px;
+
   padding: 5px;
+
   margin-left: 0px;
+
   background: lightgray;
+
 }
+
 .insideR {
+
   max-width: 500px;
+
   margin-left: 100px;
+
   margin-bottom: 150px;
+
+}
+
+.container {
+
+  background: -moz-radial-gradient(center, ellipse cover, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* ff3.6+ */
+
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(28,144,176,1)), color-stop(72%, rgba(180,216,232,1)), color-stop(100%, rgba(240,245,255,1))); /* safari4+,chrome */
+
+  background:-webkit-radial-gradient(center, ellipse cover, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* safari5.1+,chrome10+ */
+
+  background: -o-radial-gradient(center, ellipse cover, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* opera 11.10+ */
+
+  background: -ms-radial-gradient(center, ellipse cover, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* ie10+ */
+
+  background:radial-gradient(ellipse at center, rgba(28,144,176,1) 0%, rgba(180,216,232,1) 72%, rgba(240,245,255,1) 100%); /* w3c */
+
+
+
+
+
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1C90B0', endColorstr='#F0F5FF',GradientType=1 ); /* ie6-9 */
+
+
+
+}
+
+/* .jumbotron{
+
+  background: rgb(255,255,255)!important;
+
+} */
+
+#home{
+
+  background-image: url('https://static.pexels.com/photos/346529/pexels-photo-346529.jpeg')!important;
+
+  background-size: cover;
+
+
+
+  background-color: rgb(220,220,220) !important;
+
+  background-blend-mode: screen;
+
+}
+
+
+
+#LTC{
+
+  background-image: url('https://static.pexels.com/photos/346529/pexels-photo-346529.jpeg')!important;
+
+  background-size: cover;
+
+
+
+  background-color: rgb(220,220,220) !important;
+
+  background-blend-mode: screen;
+
+  padding-bottom: 50px;
+
+}
+
+#NotCov{
+
+  background-image: url('https://static.pexels.com/photos/346529/pexels-photo-346529.jpeg')!important;
+
+  background-size: cover;
+
+
+
+  background-color: rgb(220,220,220) !important;
+
+  background-blend-mode: screen;
+
+  padding-bottom: 10px;
+
+}
+
+#res{
+
+  background-image: url('https://static.pexels.com/photos/346529/pexels-photo-346529.jpeg')!important;
+
+  background-size: cover;
+
+
+
+  background-color: rgb(220,220,220) !important;
+
+  background-blend-mode: screen;
+
+  padding-bottom: 10px;
+
 }
